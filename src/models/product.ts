@@ -1,5 +1,5 @@
 export type Product = {
-    id: string;
+    id: string | number;
     title: string;
     description: string;
     price: number;
@@ -8,5 +8,6 @@ export type Product = {
     salesUnit: "group" | "unit" | "area";
     measurementUnit?: "m2" | "m" | "pallet" | "bolson";
     unitValue?: number;
+    image: String
 };
   

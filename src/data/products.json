@@ -8,7 +8,8 @@
       "stock": 5,
       "salesUnit": "group",
       "measurementUnit": "pallet",
-      "unitValue": 198
+      "unitValue": 198,
+      "image": "/images/ladrillos.png"
     },
     {
       "id": 2060,
@@ -18,7 +19,8 @@
       "stock": 5,
       "salesUnit": "area",
       "measurementUnit": "m2",
-      "unitValue": 2.68
+      "unitValue": 2.68,
+      "image": "/images/ceramico.png"
     },
     {
       "id": 10035,
@@ -27,6 +29,7 @@
       "price": 76293,
       "listingPrice": 89757,
       "stock": 5,
-      "salesUnit": "unit"
+      "salesUnit": "unit",
+      "image": "/images/hierro.png"
     }
   ]  
