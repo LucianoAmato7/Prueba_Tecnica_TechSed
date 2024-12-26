@@ -15,7 +15,7 @@ export default function ProductDetail({ params }: { params: { productID: string 
   }
 
   return (
-    <div className="container mx-auto px-4 py-6 max-w-screen-md border border-gray-200 rounded-md shadow-md mt-12">
+    <div className="container mx-auto px-4 py-6 max-w-screen-md border border-gray-200 rounded-md shadow-md md:mt-12">
       <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
         <div className="relative overflow-hidden">
 
