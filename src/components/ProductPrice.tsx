@@ -7,7 +7,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ price, listingPrice }) => {
   return (
     <div>
       <div className="flex items-center gap-2">
-        <span className="text-2xl font-bold">${price.toLocaleString()}</span>
+        <span className={`text-2xl font-bold ${!listingPrice && "mb-7"}`}>${price.toLocaleString()}</span>
         {listingPrice && (
           <>
             <span className="text-sm text-white bg-blue-500 py-1 px-2 rounded-xl">

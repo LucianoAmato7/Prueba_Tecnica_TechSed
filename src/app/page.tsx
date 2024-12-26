@@ -21,9 +21,9 @@ export default function ProductMenu() {
                   <Image
                   src={IMAGE_PATHS.BLACK_AL_COSTO.url}
                   alt={IMAGE_PATHS.BLACK_AL_COSTO.alt}
-                  width={500}
-                  height={500}
-                  className="absolute left-2 top-2 z-10 w-28"
+                  width={120}
+                  height={120}
+                  className="absolute left-2 top-2 z-10"
                 />
               )}
               <div className="aspect-square">
@@ -36,7 +36,7 @@ export default function ProductMenu() {
                 />
               </div>
             </div>
-            <div className="flex flex-col p-4 justify-between flex-1">
+            <div className="flex flex-col p-4 justify-between flex-1 space-y-3">
               <h2 className="line-clamp-2 text-lg font-semibold">{product.title}</h2>
               <ProductPrice 
                 price={product.price} 

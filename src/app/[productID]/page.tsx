@@ -15,17 +15,17 @@ export default function ProductDetail({ params }: { params: { productID: string 
   }
 
   return (
-    <div className="container mx-auto px-4 py-6">
-      <div className="grid gap-8 md:grid-cols-2">
-        <div className="relative overflow-hidden bg-gray-100">
+    <div className="container mx-auto px-4 py-6 max-w-screen-md border border-gray-200 rounded-md shadow-md mt-12">
+      <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
+        <div className="relative overflow-hidden">
 
           {product.listingPrice && (
             <Image
             src={IMAGE_PATHS.BLACK_AL_COSTO.url}
             alt={IMAGE_PATHS.BLACK_AL_COSTO.alt}
-            width={500}
-            height={500}
-            className="absolute left-3 top-3 z-10 w-36"
+            width={150}
+            height={150}
+            className="absolute left-3 top-3 z-10"
             />
           )}
 
@@ -33,14 +33,14 @@ export default function ProductDetail({ params }: { params: { productID: string 
             <Image
               src={product.image}
               alt={product.title}
-              width={500}
-              height={500}
-              className="h-full w-full object-cover rounded-lg"
+              width={600}
+              height={600}
+              className="object-cover rounded-lg"
             />
           </div>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-6 w-full max-w-md">
           <div>
             <div className="text-sm text-gray-500 ">SKU: 0000</div>
             <h1 className="text-2xl font-bold">{product.title}</h1>
@@ -52,45 +52,17 @@ export default function ProductDetail({ params }: { params: { productID: string 
             listingPrice={product.listingPrice} 
           />
 
-          <div className="space-y-4">
-            <div>
-              <label className="text-sm font-medium">Cantidad de unidades</label>
-              <div className="mt-1 flex items-center gap-4">
-                <div className="w-32 rounded-md border px-3 py-2">
-                  unidades
-                </div>
-                <span className="text-sm text-gray-500">unidades</span>
-              </div>
-            </div>
+          {/* ACA IRIA EL COMPONENTE DE CANTIDADES */}
 
-            <div>
-              <label className="text-sm font-medium">Cantidad de pallets</label>
-              <div className="mt-1 flex items-center gap-4">
-                <button
-                  // onClick={() => handlePalletChange(-1)}
-                  // disabled={pallets <= 1}
-                >
-                    -
-                </button>
-                <div className="w-16 text-center">pallets</div>
-                <button
-                  // onClick={() => handlePalletChange(1)}
-                >
-                    +
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-sm text-gray-500">
+          <div className="text-base text-gray-400 font-bold">
             {product.description}
           </div>
 
-          <div className="space-y-4 text-xl font-bold">
-            <button className="w-2/3 bg-blue-900 hover:bg-blue-700 text-white py-4 rounded-e-full rounded-s-full shadow-lg">
+          <div className="space-y-4 text-xl font-bold flex flex-col items-center">
+            <button className="w-full bg-blue-900 hover:bg-blue-700 text-white py-4 rounded-e-full rounded-s-full shadow-lg">
               Comprar ahora
             </button>
-            <button className="w-2/3 text-blue-900 border-2 border-blue-900 py-4 shadow-lg flex items-center rounded-e-full rounded-s-full justify-center gap-2">
+            <button className="w-full text-blue-900 border-2 border-blue-900 py-4 shadow-lg flex items-center rounded-e-full rounded-s-full justify-center gap-2">
               Agregar
               <IoCartOutline className="text-2xl"/>
             </button>
