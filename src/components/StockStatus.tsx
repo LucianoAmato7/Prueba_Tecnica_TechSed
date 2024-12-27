@@ -1,27 +1,20 @@
-import { FaRegCheckCircle } from "react-icons/fa";
-import { MdOutlineCancel } from "react-icons/md";
+import { StockStatusProps } from "@/types/interfaces/interfaces";
+import Icons from "@/utils/icons";
 
-interface StockStatusProps {
-  stock: number;
-}
-
-const StockStatus: React.FC<StockStatusProps> = ({ stock }) => {
-
+export default function StockStatus({ stock }: StockStatusProps)  {
   return (
     <div className="flex row align-center gap-1 items-center">
       {stock > 0 ? (
         <>
-          <FaRegCheckCircle className="text-green-400" />
+          <Icons.CheckCircle className="text-green-400" />
           <span>Stock disponible</span>
         </>
       ) : (
         <>
-          <MdOutlineCancel className="text-red-400" />
+          <Icons.Cancel className="text-red-400" />
           <span>Sin stock</span>
         </>
       )}
     </div>
   );
 };
-
-export default StockStatus;

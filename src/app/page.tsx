@@ -1,12 +1,11 @@
-import products from "@/data/products.json"
-import Image from "next/image"
-import Link from "next/link"
+import products from "@/data/products.json";
+import Image from "next/image";
+import Link from "next/link";
 import { IMAGE_PATHS } from "@/utils/constants";
 import StockStatus from "@/components/StockStatus";
 import ProductPrice from "@/components/ProductPrice";
 
 export default function ProductMenu() {
-
   return (
     <div className="container mx-auto px-4 py-6">
       <div className="mb-8 space-y-4">
@@ -15,10 +14,13 @@ export default function ProductMenu() {
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {products.map((product) => (
-          <div key={product.id} className="flex flex-col bg-white shadow-md rounded-md">
+          <div
+            key={product.id}
+            className="flex flex-col bg-white shadow-md rounded-md"
+          >
             <div className="relative">
               {product.listingPrice && (
-                  <Image
+                <Image
                   src={IMAGE_PATHS.BLACK_AL_COSTO.url}
                   alt={IMAGE_PATHS.BLACK_AL_COSTO.alt}
                   width={120}
@@ -37,10 +39,12 @@ export default function ProductMenu() {
               </div>
             </div>
             <div className="flex flex-col p-4 justify-between flex-1 space-y-3">
-              <h2 className="line-clamp-2 text-lg font-semibold">{product.title}</h2>
-              <ProductPrice 
-                price={product.price} 
-                listingPrice={product.listingPrice} 
+              <h2 className="line-clamp-2 text-lg font-semibold">
+                {product.title}
+              </h2>
+              <ProductPrice
+                price={product.price}
+                listingPrice={product.listingPrice}
               />
               <StockStatus stock={product.stock} />
             </div>
@@ -55,6 +59,5 @@ export default function ProductMenu() {
         ))}
       </div>
     </div>
-  )
+  );
 }
-

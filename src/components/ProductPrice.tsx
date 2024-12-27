@@ -1,13 +1,13 @@
-interface ProductPriceProps {
-  price: number;
-  listingPrice?: number;
-}
+import { ProductPriceProps } from "@/types/interfaces/interfaces";
+import { formatPrice } from "@/utils/formatPrice";
 
-const ProductPrice: React.FC<ProductPriceProps> = ({ price, listingPrice }) => {
+export default function ProductPrice({ price, listingPrice }: ProductPriceProps) {
   return (
     <div>
       <div className="flex items-center gap-2">
-        <span className={`text-2xl font-bold ${!listingPrice && "mb-7"}`}>${price.toLocaleString()}</span>
+        <span className={`text-2xl font-bold ${!listingPrice && "mb-7"}`}>
+          {formatPrice(price)}
+        </span>
         {listingPrice && (
           <>
             <span className="text-sm text-white bg-blue-500 py-1 px-2 rounded-xl">
@@ -18,11 +18,9 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ price, listingPrice }) => {
       </div>
       {listingPrice && (
         <div className="text-base text-gray-500">
-          <span className="line-through">${listingPrice.toLocaleString()}</span>
+          <span className="line-through">{formatPrice(listingPrice)}</span>
         </div>
       )}
     </div>
   );
 };
-
-export default ProductPrice;
