@@ -1,5 +1,7 @@
-import { Cart } from "../cart";
-import { Product } from "../product";
+import { Cart } from "../types/cart";
+import { Product } from "../types/product";
+
+// Interfaces utilizadas en los componentes de la aplicación para tipar las props.
 
 export interface StockStatusProps {
     stock: number;

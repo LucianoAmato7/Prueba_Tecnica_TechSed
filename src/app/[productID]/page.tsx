@@ -8,7 +8,7 @@ import CartSummary from "@/components/CartSummary";
 import { useState, use } from "react";
 import { Cart } from "@/types/cart";
 import { Product } from "@/types/product";
-import ProductQuantity from "@/components/ProductQuantity";
+import ProductQuantity from "@/components/ProductQuantitySelector";
 
 export default function ProductDetail({
   params,
@@ -33,12 +33,10 @@ export default function ProductDetail({
   });
 
   const actualParams = use(params);
-
   const productID = actualParams.productID;
   const product = products.find((p) => p.id.toString() === productID) as Product;
 
   const addToCart = (product: Product, quantity: number) => {
-    //TIENE QUE VERIFICAR QUE LA CANTAIDAD DEL CARRITO NO SOBREPASE EL STOCK
     setCart((prevCart) => {
       const existingProductIndex = prevCart.items.findIndex(
         (item) => item.product.id === product.id
@@ -80,7 +78,6 @@ export default function ProductDetail({
                   className="absolute left-3 top-3 z-10"
                 />
               )}
-
               <div className="aspect-square">
                 <Image
                   src={product.image.toString()}
@@ -91,11 +88,10 @@ export default function ProductDetail({
                 />
               </div>
             </div>
-
             <div className="space-y-5 w-full max-w-md">
               <div>
                 <div className="text-sm text-gray-500 ">SKU: {product.id}</div>
-                <h1 className="text-2xl font-bold">{product.title}</h1>
+                <h1 className="text-xl font-bold">{product.title}</h1>
                 <StockStatus stock={product.stock} />
               </div>
 

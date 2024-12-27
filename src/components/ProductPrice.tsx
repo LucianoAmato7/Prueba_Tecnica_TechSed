@@ -1,4 +1,4 @@
-import { ProductPriceProps } from "@/types/interfaces/interfaces";
+import { ProductPriceProps } from "@/interfaces/interfaces";
 import { formatPrice } from "@/utils/formatPrice";
 
 export default function ProductPrice({ price, listingPrice }: ProductPriceProps) {
@@ -9,11 +9,9 @@ export default function ProductPrice({ price, listingPrice }: ProductPriceProps)
           {formatPrice(price)}
         </span>
         {listingPrice && (
-          <>
-            <span className="text-sm text-white bg-blue-500 py-1 px-2 rounded-xl">
-              {Math.round(((listingPrice - price) / listingPrice) * 100)}% OFF
-            </span>
-          </>
+          <span className="text-sm text-white bg-blue-500 py-1 px-2 rounded-xl">
+            {Math.round(((listingPrice - price) / listingPrice) * 100)}% OFF
+          </span>
         )}
       </div>
       {listingPrice && (

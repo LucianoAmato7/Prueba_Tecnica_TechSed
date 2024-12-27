@@ -1,4 +1,4 @@
-import { CartSummaryProps } from "@/types/interfaces/interfaces";
+import { CartSummaryProps } from "@/interfaces/interfaces";
 import { formatPrice } from "@/utils/formatPrice";
 import Image from 'next/image'
 import { IoCartOutline } from "react-icons/io5";

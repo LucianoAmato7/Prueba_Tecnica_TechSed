@@ -49,6 +49,7 @@ export default function ProductMenu() {
               <StockStatus stock={product.stock} />
             </div>
             <div className="p-4 pt-0">
+              {/* Renderiza un botón que redirige a la página de detalle del producto */}
               <Link href={`/${product.id}`} className="w-full">
                 <button className="w-full bg-black text-white py-2 rounded-md shadow-lg">
                   Ver detalle

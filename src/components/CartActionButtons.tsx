@@ -1,4 +1,4 @@
-import { CartActionButtonsProps } from "@/types/interfaces/interfaces";
+import { CartActionButtonsProps } from "@/interfaces/interfaces";
 import Icons from "@/utils/icons";
 
 export default function CartActionButtons({

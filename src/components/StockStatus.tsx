@@ -1,4 +1,4 @@
-import { StockStatusProps } from "@/types/interfaces/interfaces";
+import { StockStatusProps } from "@/interfaces/interfaces";
 import Icons from "@/utils/icons";
 
 export default function StockStatus({ stock }: StockStatusProps)  {
