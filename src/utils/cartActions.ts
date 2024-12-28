@@ -9,26 +9,31 @@ export function addToCart(
   cart: Cart,
   setCart: (value: Cart) => void
 ) {
-  if(quantity > 0) {
-    if (product.stock < quantity) {
-      console.error(`Stock insuficiente para el producto: ${product.title}`);
-      return;
-    }
-  
-    const existingProductIndex = cart.items.findIndex(
-      (item) => item.product.id === product.id
-    );
-  
-    let updatedItems = [...cart.items];
-  
-    if (existingProductIndex >= 0) {
-      updatedItems[existingProductIndex] = { ...updatedItems[existingProductIndex], quantity };
-    } else {
-      updatedItems = [...updatedItems, { product, quantity }];
-    }
-  
-    setCart({ ...cart, items: updatedItems });
+
+  if(quantity <= 0) {
+    console.error(`La cantidad de productos debe ser mayor a 0`);
+    return;
   }
+
+  if (quantity > product.stock) {
+    console.error(`Stock insuficiente para el producto: ${product.title}`);
+    return;
+  }
+  
+  const existingProductIndex = cart.items.findIndex(
+    (item) => item.product.id === product.id
+  );
+
+  let updatedItems = [...cart.items];
+
+  if (existingProductIndex >= 0) {
+    updatedItems[existingProductIndex] = { ...updatedItems[existingProductIndex], quantity };
+  } else {
+    updatedItems = [...updatedItems, { product, quantity }];
+  }
+
+  setCart({ ...cart, items: updatedItems });
+
 }
 
 export function removeFromCart(
@@ -36,8 +41,12 @@ export function removeFromCart(
   cart: Cart,
   setCart: (value: Cart) => void
 ) {
-  if(productID && cart.items.length > 0) {
-    const updatedItems = cart.items.filter((item) => item.product.id !== productID);
-    setCart({ ...cart, items: updatedItems });
+
+  if(cart.items.length === 0) {
+    console.error(`El carrito está vacío`);
+    return;
   }
+  
+  const updatedItems = cart.items.filter((item) => item.product.id !== productID);
+  setCart({ ...cart, items: updatedItems });
 }

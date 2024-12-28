@@ -30,6 +30,6 @@ export function GetPackageDescription(salesUnit: Product["salesUnit"]) {
     packageDescription = "Cantidad de cajas";
   } else if (salesUnit === "unit") {
     packageDescription = "Cantidad de unidades";
-  }
+  } 
   return packageDescription;
 }
