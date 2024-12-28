@@ -15,16 +15,6 @@ export default function ProductDetail({
 }: {
   params: Promise<{ productID: string }>;
 }) {
-  // const product1: Product = {
-  //   id: "10035",
-  //   title: "Hierro 25 mm x 12 m Acindar",
-  //   description: "HIERRO 25 MM X 12M",
-  //   price: 76293,
-  //   listingPrice: 89757,
-  //   stock: 5,
-  //   salesUnit: "unit",
-  //   image: "/images/hierro.png",
-  // };
 
   const [cart, setCart] = useState<Cart>({
     id: "cart1",
@@ -37,22 +27,31 @@ export default function ProductDetail({
   const product = products.find((p) => p.id.toString() === productID) as Product;
 
   const addToCart = (product: Product, quantity: number) => {
-    setCart((prevCart) => {
-      const existingProductIndex = prevCart.items.findIndex(
-        (item) => item.product.id === product.id
-      );
-      if (existingProductIndex >= 0) {
-        const updatedItems = [...prevCart.items];
-        updatedItems[existingProductIndex].quantity = quantity;
-        return { ...prevCart, items: updatedItems };
-      } else {
-        return {
-          ...prevCart,
-          items: [...prevCart.items, { product, quantity }],
-        };
-      }
-    });
+    if (product.stock < quantity) {
+      console.error(`Stock insuficiente para el producto: ${product.title}`);
+      return;
+    }
+    
+    if(quantity > 0){
+        setCart((prevCart) => {
+          const existingProductIndex = prevCart.items.findIndex(
+            (item) => item.product.id === product.id
+          );
+          
+          if (existingProductIndex >= 0) {
+            const updatedItems = [...prevCart.items];
+            updatedItems[existingProductIndex].quantity = quantity;
+            return { ...prevCart, items: updatedItems };
+          } else {
+            return {
+              ...prevCart,
+              items: [...prevCart.items, { product, quantity }],
+            };
+          }
+        });
+    }
   };
+  
 
   const removeFromCart = (productId: string) => {
     setCart((prevCart) => ({
@@ -66,8 +65,8 @@ export default function ProductDetail({
       {!product ? (
         <div>Producto no encontrado</div>
       ) : (
-        <div className="max-w-screen-md mx-auto h-full flex flex-col gap-8 md:gap-20 items-center">
-          <div className="container flex flex-col md:flex-row gap-8 justify-center items-center border border-gray-200 shadow-md rounded-md md:mt-7 px-4 py-3">
+        <div className="max-w-screen-lg mx-auto h-full flex flex-col gap-8 md:gap-20 items-center">
+          <div className="container flex flex-col md:flex-row gap-10 justify-center items-center border border-gray-200 shadow-md rounded-md md:mt-7 px-4 py-3">
             <div className="relative overflow-hidden">
               {product.listingPrice && (
                 <Image
@@ -82,8 +81,8 @@ export default function ProductDetail({
                 <Image
                   src={product.image.toString()}
                   alt={product.title}
-                  width={600}
-                  height={600}
+                  width={450}
+                  height={450}
                   className="object-cover rounded-lg"
                 />
               </div>

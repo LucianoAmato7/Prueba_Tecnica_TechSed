@@ -26,3 +26,5 @@ bun dev
 -Persistir carrito en localStorage
 -al agregar al carrito que cantidad vuelva a 0
 -Manejar cambios al modificar las unidades (en "group" que redondee para arriba si es multiplo del unitValue)
+-separar interfaces
+

@@ -30,3 +30,11 @@ export interface CartActionButtonsProps  {
     AddToCartModifier: (quantity: number) => void;
     removeFromCartModifier: (productId: string) => void;
 };
+
+export interface QuantitySelectorProps {
+    quantity: number;
+    setQuantity: (value: number) => void;
+    inputValue: number;
+    setInputValue: (value: number) => void;
+    product: Product;
+}
