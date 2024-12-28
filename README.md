@@ -12,7 +12,7 @@ Antes de ejecutar el proyecto, debes instalar las dependencias necesarias. Para 
 
 2. Navega a la carpeta del proyecto:
 
-- `cd prueba-tecnica-techsed`
+- `cd Prueba_Tecnica_TechSed`
 
 3. Instala las dependencias:
 
