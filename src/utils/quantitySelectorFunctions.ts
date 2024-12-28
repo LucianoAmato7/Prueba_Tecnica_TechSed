@@ -4,56 +4,6 @@ import { Product } from "@/types/product";
 // para validar la entrada de datos en el input de cantidad
 // y para manejar la cantidad de productos seleccionados
 
-//Valida que el input sea un número con 4 dígitos enteros y 2 decimales si la unidad de venta es por area
-
-export function handleInputChangeFactory(
-  salesUnit: Product["salesUnit"],
-  unitValue?: number,
-  setQuantity?: (value: number) => void,
-  stock?: number,
-  currentQuantity?: number
-) {
-  return function handleInputChange(
-    e: React.ChangeEvent<HTMLInputElement>,
-    setInputValue: (value: number) => void
-  ) {
-    const value = e.target.value;
-    let regex;
-
-    // Define el patrón según la unidad de venta
-    if (salesUnit === "area") {
-      regex = /^\d{0,4}(\.\d{0,2})?$/; // Permitir 4 dígitos enteros y 2 decimales
-    } else {
-      regex = /^\d{0,4}$/; // Permitir solo 4 dígitos enteros
-    }
-
-    if (regex.test(value)) {
-      const newValue = value === "" ? 0 : parseFloat(value);
-
-      // Verificar si el nuevo valor es válido numéricamente
-      if (!isNaN(newValue)) {
-        const max = (unitValue ?? 0) * (stock ?? 0);
-
-        // Validar que no supere el máximo permitido
-        if (newValue <= max) {
-          setInputValue(newValue);
-
-          // Ajustar la cantidad requerida si la unidad de venta es "area"
-          if (salesUnit === "area" && unitValue !== undefined && setQuantity) {
-            const requiredQuantity = Math.ceil(newValue / unitValue);
-            if (
-              stock !== undefined &&
-              requiredQuantity + (currentQuantity ?? 0) <= stock
-            ) {
-              setQuantity(requiredQuantity);
-            }
-          }
-        }
-      }
-    }
-  };
-}
-
 // export function handleInputChangeFactory(
 //   salesUnit: Product["salesUnit"],
 //   unitValue?: number,
@@ -66,30 +16,94 @@ export function handleInputChangeFactory(
 //     setInputValue: (value: number) => void
 //   ) {
 //     const value = e.target.value;
-//     const regex = salesUnit === "area" ? /^\d{0,4}(\.\d{0,2})?$/ : /^\d{0,4}$/;
+//     let regex;
+
+//     // Define el patrón según la unidad de venta
+//     if (salesUnit === "area") {
+//       regex = /^\d{0,4}(\.\d{0,2})?$/;
+//     } else {
+//       regex = /^\d{0,4}$/;
+//     }
 
 //     if (regex.test(value)) {
 //       const newValue = value === "" ? 0 : parseFloat(value);
 
-//       if (!isNaN(newValue) && unitValue) {
-//         const max = unitValue * (stock ?? 0);
+//       if (!isNaN(newValue)) {
+//         const max = (unitValue ?? 0) * (stock ?? 0);
 
+//         // Validar que no supere el máximo permitido
 //         if (newValue <= max) {
-
-//           if (salesUnit === "area" && unitValue !== undefined) {
-//             const adjustedValue = Math.round(newValue / unitValue) * unitValue; // Ajuste al múltiplo más cercano
-//             setInputValue(parseFloat(adjustedValue.toFixed(2))); // Se actualiza el inputValue
-//             const requiredQuantity = Math.ceil(adjustedValue / unitValue);
-//             if (stock !== undefined && requiredQuantity + (currentQuantity ?? 0) <= stock) {
-//               setQuantity?.(requiredQuantity); // Se actualiza el quantity
+//           if (salesUnit === "area" && unitValue !== undefined && setQuantity) {
+//             setInputValue(newValue);
+//             const requiredQuantity = Math.ceil(newValue / unitValue);
+//             if (
+//               stock !== undefined &&
+//               requiredQuantity + (currentQuantity ?? 0) <= stock
+//             ) {
+//               setQuantity(requiredQuantity);
+//             }
+//           }else if(salesUnit === "group" && unitValue !== undefined && setQuantity){
+//             setInputValue(Math.ceil(newValue));
+//             const requiredQuantity = Math.ceil(newValue / unitValue);
+//             if (
+//               stock !== undefined &&
+//               requiredQuantity + (currentQuantity ?? 0) <= stock
+//             ) {
+//               setQuantity(requiredQuantity);
 //             }
 //           }
-          
 //         }
 //       }
 //     }
 //   };
 // }
+
+export function handleInputChangeFactory(
+  salesUnit: Product["salesUnit"],
+  unitValue?: number,
+  setQuantity?: (value: number) => void,
+  stock?: number
+) {
+  return function handleInputChange(
+    e: React.ChangeEvent<HTMLInputElement>,
+    setInputValue: (value: number) => void
+  ) {
+    const value = e.target.value;
+    let regex;
+
+    // Define el patrón según la unidad de venta
+    if (salesUnit === "area") {
+      regex = /^\d{0,4}(\.\d{0,2})?$/
+    } else {
+      regex = /^\d{0,4}$/;
+    }
+
+    if (regex.test(value)) {
+
+      const newValue = value === "" ? 0 : parseFloat(value);
+      const requiredQuantity = unitValue ? Math.ceil(newValue / unitValue) : 0;
+
+      if (!isNaN(newValue)) {
+        const max = (unitValue ?? 0) * (stock ?? 0);
+
+        // Validar que no supere el máximo permitido
+        if (newValue <= max && setQuantity) {
+          setQuantity(requiredQuantity);
+          if (salesUnit === "area") {
+            setInputValue(newValue);
+          } else if (
+            salesUnit === "group" &&
+            unitValue !== undefined
+          ) {
+            console.log("hola");
+            
+            setInputValue(Math.ceil(newValue));
+          }
+        }
+      }
+    }
+  };
+}
 
 export function HandleIncrement(
   quantity: number,
@@ -107,13 +121,11 @@ export function HandleIncrement(
       const newQuantity = quantity + 1;
 
       if (salesUnit === "group") {
-        // Incremento basado en grupos
         setQuantity(newQuantity);
         setInputValue(newQuantity * unitValue);
       } else if (salesUnit === "area") {
-        // Incremento basado en áreas
         const newInputValue = parseFloat((newQuantity * unitValue).toFixed(2));
-        setInputValue(parseFloat(newInputValue.toFixed(2))); 
+        setInputValue(parseFloat(newInputValue.toFixed(2)));
         setQuantity(Math.ceil(newInputValue / unitValue));
       }
     }

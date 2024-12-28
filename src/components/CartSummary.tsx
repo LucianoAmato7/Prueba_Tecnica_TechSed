@@ -9,7 +9,7 @@ export default function CartSummary({ cart }: CartSummaryProps) {
 
   return (
     
-    <div className="w-full border border-gray-200 shadow-md rounded-md">
+    <div className="w-full border border-gray-200 shadow-md rounded-md md:mb-6">
       <div className="p-4 flex items-center justify-between ">
         <h2 className="text-xl font-semibold">Carrito</h2>
         <IoCartOutline className="text-3xl" />

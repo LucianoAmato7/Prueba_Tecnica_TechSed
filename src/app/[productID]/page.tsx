@@ -5,7 +5,7 @@ import { IMAGE_PATHS } from "@/utils/constants";
 import StockStatus from "@/components/StockStatus";
 import ProductPrice from "@/components/ProductPrice";
 import CartSummary from "@/components/CartSummary";
-import { useState, use } from "react";
+import { useState, use, useEffect } from "react";
 import { Cart } from "@/types/cart";
 import { Product } from "@/types/product";
 import ProductQuantity from "@/components/ProductQuantitySelector";
@@ -22,36 +22,60 @@ export default function ProductDetail({
     createdAt: new Date(),
   });
 
+  // Recupero el carrito almacenado en localStorage.
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    } else {
+      setCart({
+        id: "cart1",
+        items: [],
+        createdAt: new Date(),
+      });
+    }
+  }, []);
+  
+  // Guardo el carrito en localStorage cada vez que cambia.
+  useEffect(() => {
+    if (cart.items.length > 0) {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+  }, [cart]);
+  
+
+  // Recupero el producto a partir del ID recibido en los parámetros de la URL.
   const actualParams = use(params);
   const productID = actualParams.productID;
-  const product = products.find((p) => p.id.toString() === productID) as Product;
+  const product = products.find(
+    (p) => p.id.toString() === productID
+  ) as Product;
 
   const addToCart = (product: Product, quantity: number) => {
     if (product.stock < quantity) {
       console.error(`Stock insuficiente para el producto: ${product.title}`);
       return;
     }
-    
-    if(quantity > 0){
-        setCart((prevCart) => {
-          const existingProductIndex = prevCart.items.findIndex(
-            (item) => item.product.id === product.id
-          );
-          
-          if (existingProductIndex >= 0) {
-            const updatedItems = [...prevCart.items];
-            updatedItems[existingProductIndex].quantity = quantity;
-            return { ...prevCart, items: updatedItems };
-          } else {
-            return {
-              ...prevCart,
-              items: [...prevCart.items, { product, quantity }],
-            };
-          }
-        });
+
+    if (quantity > 0) {
+      setCart((prevCart) => {
+        const existingProductIndex = prevCart.items.findIndex(
+          (item) => item.product.id === product.id
+        );
+
+        if (existingProductIndex >= 0) {
+          const updatedItems = [...prevCart.items];
+          updatedItems[existingProductIndex].quantity = quantity;
+          return { ...prevCart, items: updatedItems };
+        } else {
+          return {
+            ...prevCart,
+            items: [...prevCart.items, { product, quantity }],
+          };
+        }
+      });
     }
   };
-  
 
   const removeFromCart = (productId: string) => {
     setCart((prevCart) => ({
@@ -103,9 +127,10 @@ export default function ProductDetail({
                 product={product}
                 cart={cart}
                 AddToCartModifier={(quantity) => addToCart(product, quantity)}
-                removeFromCartModifier={(productID) => removeFromCart(productID)}
+                removeFromCartModifier={(productID) =>
+                  removeFromCart(productID)
+                }
               />
-
             </div>
           </div>
 

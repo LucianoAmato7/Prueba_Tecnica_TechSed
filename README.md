@@ -28,3 +28,6 @@ bun dev
 -Manejar cambios al modificar las unidades (en "group" que redondee para arriba si es multiplo del unitValue)
 -separar interfaces
 
+
+explicar que se puede cambiar de cantidad siempre y cuando no se exceda el stock
+
