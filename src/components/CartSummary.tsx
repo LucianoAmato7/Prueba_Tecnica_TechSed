@@ -23,9 +23,9 @@ export default function CartSummary({ cart }: CartSummaryProps) {
                   <Image
                     src={item.product.image as string}
                     alt={item.product.title}
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-md"
+                    width={64}
+                    height={64}
+                    className="rounded-md aspect-square object-cover" 
                   />
                 </div>
                 <div className="flex-grow">

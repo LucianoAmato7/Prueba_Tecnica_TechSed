@@ -34,7 +34,7 @@ export default function ProductMenu() {
                   alt={product.title}
                   width={500}
                   height={500}
-                  className="h-full w-full object-cover rounded-t-md"
+                  className="object-cover rounded-t-md"
                 />
               </div>
             </div>
