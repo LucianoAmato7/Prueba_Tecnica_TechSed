@@ -11,12 +11,12 @@ export function addToCart(
 ) {
 
   if(quantity <= 0) {
-    console.error(`La cantidad de productos debe ser mayor a 0`);
+    console.log(`La cantidad de productos debe ser mayor a 0`);
     return;
   }
 
   if (quantity > product.stock) {
-    console.error(`Stock insuficiente para el producto: ${product.title}`);
+    console.log(`Stock insuficiente para el producto: ${product.title}`);
     return;
   }
   
@@ -43,7 +43,7 @@ export function removeFromCart(
 ) {
 
   if(cart.items.length === 0) {
-    console.error(`El carrito está vacío`);
+    console.log(`El carrito está vacío`);
     return;
   }
   
