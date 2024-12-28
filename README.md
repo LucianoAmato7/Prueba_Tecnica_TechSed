@@ -4,7 +4,21 @@ Este proyecto es una implementación de prueba técnica para TechSed, desarrolla
 
 ## Ejecución del Proyecto
 
-Para iniciar el servidor de desarrollo, ejecuta el siguiente comando en la terminal:
+Antes de ejecutar el proyecto, debes instalar las dependencias necesarias. Para hacerlo, sigue estos pasos:
+
+1. Clona el repositorio en tu máquina local:
+
+- `git clone <URL_DEL_REPOSITORIO>`
+
+2. Navega a la carpeta del proyecto:
+
+- `cd prueba-tecnica-techsed`
+
+3. Instala las dependencias:
+
+- `npm install`
+
+4. Para iniciar el servidor de desarrollo, ejecuta el siguiente comando en la terminal:
 
 - `npm run dev`
 
@@ -14,6 +28,10 @@ Este comando iniciará el servidor de desarrollo en `http://localhost:3000`. Pod
 
 El componente principal para la selección de cantidades de productos es **`ProductQuantitySelector`**. Este componente permite al usuario incrementar o decrementar la cantidad de un producto en el carrito, siempre y cuando no se exceda el stock disponible del mismo.
 Tambien permite ingresar la cantidad de unidades o metros necesaria, autocompletandose la cantidad del producto que se definirá en el carrito.
+
+## Botones de acciónes del carrito
+
+Implementados en el componente **`CartActionButtons`**, compuesto por 2 botones, "Agregar" el cual alterna entre "Agregar" y "Cambiar cantidad" (definida en el selector de cantidad y sin sobre pasar el stock), en caso de que el producto ya este agregado. y el botón de "Eliminar del carrito" el cual se habilita cuando el producto se encuentre en el carrito.
 
 ## Persistencia del Carrito en `localStorage`
 
