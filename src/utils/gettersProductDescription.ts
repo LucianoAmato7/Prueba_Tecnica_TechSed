@@ -1,5 +1,7 @@
 import { Product } from "@/types/product";
 
+// Funciones para obtener descripciones dinámicas dependiendo de la unidad de venta del producto.
+
 export function GetFieldDescription(salesUnit: Product["salesUnit"]) {
   let unit;
   if (salesUnit === "group") {

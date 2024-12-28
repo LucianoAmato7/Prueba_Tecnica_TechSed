@@ -1,6 +1,8 @@
 import { StockStatusProps } from "@/interfaces/interfaces";
 import Icons from "@/utils/icons";
 
+// Componente que muestra el estado del stock de un producto.
+
 export default function StockStatus({ stock }: StockStatusProps)  {
   return (
     <div className="flex row align-center gap-1 items-center">

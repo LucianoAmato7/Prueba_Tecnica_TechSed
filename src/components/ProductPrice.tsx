@@ -1,6 +1,8 @@
 import { ProductPriceProps } from "@/interfaces/interfaces";
 import { formatPrice } from "@/utils/formatPrice";
 
+// Crea un componente que muestra el precio de un producto e indica, si aplica, el porcentaje de descuento.
+
 export default function ProductPrice({ price, listingPrice }: ProductPriceProps) {
   return (
     <div>

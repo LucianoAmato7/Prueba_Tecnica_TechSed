@@ -12,6 +12,7 @@ export default function ProductMenu() {
         <h1 className="text-3xl font-bold">Nuestros Productos</h1>
       </div>
 
+      {/* Recorre y una grilla de productos a partir de un archivo JSON */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {products.map((product) => (
           <div

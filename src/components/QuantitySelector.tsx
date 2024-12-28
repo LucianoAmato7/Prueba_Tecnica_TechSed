@@ -1,7 +1,9 @@
 import { QuantitySelectorProps } from "@/interfaces/interfaces";
 import { GetPackageDescription } from "@/utils/gettersProductDescription";
-import { HandleDecrement, HandleIncrement } from "@/utils/quantitySelectorFunctions";
+import { HandleDecrement, HandleIncrement } from "@/utils/quantitySelectorActions";
 import React from "react";
+
+// Componente que muestra el selector de cantidad del producto a agregar al carrito.
 
 function QuantitySelector({
   quantity,

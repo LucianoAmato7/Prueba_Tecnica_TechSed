@@ -2,37 +2,39 @@
 import { ProductQuantityProps } from "@/interfaces/interfaces";
 import { useEffect, useState } from "react";
 import CartActionButtons from "./CartActionButtons";
-import { handleInputChangeFactory } from "@/utils/quantitySelectorFunctions";
 import QuantitySelector from "./QuantitySelector";
 import {
   GetFieldDescription,
   GetTittleToField,
 } from "@/utils/gettersProductDescription";
+import { handleInputChangeFactory } from "@/utils/inputValueActions";
 
-export default function ProductQuantity({
+// Componente que muestra la cantidad de productos a agregar al carrito.
+
+export default function ProductQuantitySelector({
   product,
   cart,
-  AddToCartModifier,
-  removeFromCartModifier,
+  setCart
 }: ProductQuantityProps) {
+
   const [quantity, setQuantity] = useState(1);
   const [inputValue, setInputValue] = useState(0);
 
   const cartItem = cart.items.find((item) => item.product.id === product?.id);
   const currentQuantity = cartItem ? cartItem.quantity : 0;
 
+  // Si el producto tiene una unidad de medida (measurementUnit) se establece el valor de la unidad de medida (unitValue) del producto.
   useEffect(() => {
-    // Si el producto tiene una unidad de medida (measurementUnit) se establece el valor de la unidad de medida.
-    if (product.salesUnit === "group" && product.unitValue) {
+    if(product.measurementUnit && product.unitValue){
       setInputValue(product.unitValue);
-    } else if (product.salesUnit === "area" && product.unitValue) {
-      setInputValue(product.unitValue);
+      // Se establece la cantidad en función de la unidad de medida del producto.
       setQuantity(Math.ceil(product.unitValue / product.unitValue));
     } else {
       setInputValue(1);
     }
   }, [product.salesUnit, product.unitValue]);
 
+  // Función para manejar el cambio en el input de cantidad.
   const handleInputChange = handleInputChangeFactory(
     product.salesUnit,
     product.unitValue,
@@ -65,7 +67,7 @@ export default function ProductQuantity({
             <span className="text-gray-400 text-sm">Disponibles: {(product.unitValue ?? 0) * (product.stock ?? 0)}</span>
       </div>
         )}
-
+          
         <QuantitySelector
           quantity={quantity}
           setQuantity={setQuantity}
@@ -80,9 +82,9 @@ export default function ProductQuantity({
       <CartActionButtons
         quantity={quantity}
         currentQuantity={currentQuantity}
-        productId={product.id}
-        AddToCartModifier={AddToCartModifier}
-        removeFromCartModifier={removeFromCartModifier}
+        product={product}
+        cart={cart}
+        setCart={setCart}
       />
     </div>
   );

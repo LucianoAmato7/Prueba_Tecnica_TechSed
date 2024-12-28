@@ -3,8 +3,16 @@ import { Product } from "../types/product";
 
 // Interfaces utilizadas en los componentes de la aplicación para tipar las props.
 
-export interface StockStatusProps {
-    stock: number;
+export interface CartActionButtonsProps  {
+    quantity: number;
+    currentQuantity: number;
+    product: Product;
+    cart: Cart
+    setCart: (value: Cart) => void;
+};
+
+export interface CartSummaryProps {
+    cart: Cart;
 }
 
 export interface ProductPriceProps {
@@ -12,24 +20,11 @@ export interface ProductPriceProps {
     listingPrice?: number;
 }
 
-export interface CartSummaryProps {
-    cart: Cart;
-}
-
 export interface ProductQuantityProps {
     product: Product;
     cart: Cart;
-    AddToCartModifier: (quantity: number) => void;
-    removeFromCartModifier: (productId: string) => void;
+    setCart: (value: Cart) => void;
 }
-
-export interface CartActionButtonsProps  {
-    quantity: number;
-    currentQuantity: number;
-    productId: string;
-    AddToCartModifier: (quantity: number) => void;
-    removeFromCartModifier: (productId: string) => void;
-};
 
 export interface QuantitySelectorProps {
     quantity: number;
@@ -37,4 +32,8 @@ export interface QuantitySelectorProps {
     inputValue: number;
     setInputValue: (value: number) => void;
     product: Product;
+}
+
+export interface StockStatusProps {
+    stock: number;
 }

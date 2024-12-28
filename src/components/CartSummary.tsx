@@ -3,6 +3,8 @@ import { formatPrice } from "@/utils/formatPrice";
 import Image from 'next/image'
 import { IoCartOutline } from "react-icons/io5";
 
+// Componente que muestra un resumen del carrito.
+
 export default function CartSummary({ cart }: CartSummaryProps) {
 
   const total = cart.items.reduce((sum, item) => sum + item.product.price * item.quantity, 0)
